@@ -51,8 +51,8 @@ while True:
 
         phases = {
             "Diplomacy": "\N{pistol} DIPLOMACY\n",
-            "Retreat": "\N{anger symbol} RETREAT\n",
-            "Build": "\N{hammer} BUILD\n"
+            "Retreats": "\N{anger symbol} RETREAT\n",
+            "Builds": "\N{hammer} BUILD\n"
         }
 
         message_string = phases[this_phase] + this_season + ", " + this_year
