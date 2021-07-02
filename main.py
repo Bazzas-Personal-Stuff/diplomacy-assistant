@@ -59,8 +59,8 @@ while True:
 
         url = scraper.get_map_url()
         print("Sending message: {}".format(message_string))
-        # msg.login()
-        # msg.send_msg(url, message_string)
+        msg.login()
+        msg.send_msg(url, message_string)
     else:
         print("No progress detected. Sleeping for {} seconds.".format(config.POLL_TIME))
 

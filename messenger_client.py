@@ -2,7 +2,7 @@ from fbchat import *
 import fbchat
 import config
 import getpass
-import urllib
+import urllib.request as url
 
 
 fb_client: Client
@@ -37,6 +37,6 @@ def send_msg(map_url: str, message: str):
     if fb_client is None:
         login()
 
-    urllib.request.urlretrieve(map_url, "map.png")
+    url.urlretrieve(map_url, "map.png")
     fb_client.sendLocalImage("map.png", message, fb_thread, fbchat.ThreadType.GROUP)
 
