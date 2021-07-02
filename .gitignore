@@ -1,0 +1,4 @@
+*.private
+map.png
+dipl_*.txt
+__pycache__
