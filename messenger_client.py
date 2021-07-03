@@ -5,19 +5,18 @@ import urllib.request as url
 
 
 fb_client: Client
-fb_thread: int
 
 
-def login():
+def login(email=config.FB_EMAIL, password=config.FB_PASSWORD):
     global fb_client
-    fb_client = fbchat.Client(config.FB_EMAIL, config.FB_PASSWORD)
+    fb_client = fbchat.Client(email, password)
 
 
-def send_msg(map_url: str, message: str):
+def send_msg(map_url: str, message: str, thread=config.FB_GROUP_THREAD_ID):
     global fb_client
     if fb_client is None:
         login()
 
     url.urlretrieve(map_url, "map.png")
-    fb_client.sendLocalImage("map.png", message, fb_thread, fbchat.ThreadType.GROUP)
+    fb_client.sendLocalImage("map.png", message, thread, fbchat.ThreadType.GROUP)
 

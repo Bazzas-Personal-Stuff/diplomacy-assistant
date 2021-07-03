@@ -48,12 +48,12 @@ while True:
 
 
         phases = {
-            "Diplomacy": "\N{pistol} DIPLOMACY\n",
-            "Retreats": "\N{anger symbol} RETREAT\n",
-            "Builds": "\N{hammer} BUILD\n"
+            "Diplomacy": "\N{pistol} DIPLOMACY: {}, {} \N{pistol}\n",
+            "Retreats": "\N{anger symbol} RETREAT: {}, {} \N{anger symbol}\n\N{no entry sign} Communications Blackout\N{no entry sign}\n",
+            "Builds": "\N{hammer} BUILD: {}, {} \N{hammer}\n\N{no entry sign} Communications Blackout \N{no entry sign}\n"
         }
 
-        message_string = phases[this_phase] + this_season + ", " + this_year
+        message_string = phases[this_phase].format(this_season, this_year)
 
         url = scraper.get_map_url()
         print("Sending message: {}".format(message_string))
