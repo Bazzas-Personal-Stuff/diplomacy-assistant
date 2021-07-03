@@ -45,9 +45,7 @@ while True:
         # retreat phase:        U+1F4A2     \N{anger symbol}
         # build phase:          U+1F528     \N{HAMMER}
 
-        save_file = open(save_name, "wt")
-        save_file.write(this_season + '\n' + this_year + '\n' + this_phase + '\n')
-        save_file.close()
+
 
         phases = {
             "Diplomacy": "\N{pistol} DIPLOMACY\n",
@@ -61,7 +59,13 @@ while True:
         print("Sending message: {}".format(message_string))
         msg.login()
         msg.send_msg(url, message_string)
-    else:
-        print("No progress detected. Sleeping for {} seconds.".format(config.POLL_TIME))
 
+        save_file = open(save_name, "wt")
+        save_file.write(this_season + '\n' + this_year + '\n' + this_phase + '\n')
+        save_file.close()
+
+    else:
+        print("No progress detected.")
+
+    print("Sleeping for {} seconds.".format(config.POLL_TIME))
     time.sleep(int(config.POLL_TIME))
