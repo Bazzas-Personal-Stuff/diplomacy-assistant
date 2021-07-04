@@ -7,7 +7,9 @@ setup(name='diplomacy-messenger',
       author='Bailey Gibbons',
       install_requires=[
             'bs4',
-            'requests'
+            'requests',
+            'discord',
+            'python-dotenv'
       ],
       zip_safe=False)
 

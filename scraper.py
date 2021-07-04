@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
-import config
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+WD_GAME_ID = os.getenv('WD_GAME_ID')
 ROOT_URL = "https://webdiplomacy.net/"
 GAME_URL = ROOT_URL + "board.php?gameID="
 
@@ -10,7 +13,7 @@ soup: any
 
 def get_soup():
     global soup
-    response = requests.get(GAME_URL + str(config.WD_GAME_ID))
+    response = requests.get(GAME_URL + str(WD_GAME_ID))
     text = response.text
     soup = BeautifulSoup(text, 'html.parser')
 
