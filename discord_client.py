@@ -3,6 +3,7 @@ import discord
 from discord.ext import tasks
 from dotenv import load_dotenv
 import os
+import scraper
 
 
 class MyClient(discord.Client):
@@ -15,8 +16,9 @@ class MyClient(discord.Client):
     load_dotenv()
     TOKEN = os.getenv('DISCORD_TOKEN')
     CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
+    ROLE_ID = os.getenv('DISCORD_MENTION_ROLE_ID')
     POLL_WAIT_TIME = int(os.getenv('WD_POLL_WAIT_TIME'))
-    COMMS_MESSAGE = '\N{no entry sign} Communications Blackout \N{no entry sign}'
+    COMMS_MESSAGE = '\N{no entry sign} Communications Blackout \N{no entry sign}\n'
 
     @tasks.loop(seconds=POLL_WAIT_TIME)
     async def poll_diplomacy(self):
@@ -29,8 +31,10 @@ class MyClient(discord.Client):
             embed.title = message[0]
             if not message[2]:
                 embed.description = self.COMMS_MESSAGE
+
             embed.color = discord.Colour(message[3])
             embed.set_footer(text=message[4])
+            await channel.send('<@&{}>'.format(self.ROLE_ID))
             await channel.send(embed=embed)
 
         print(self.POLL_WAIT_TIME)
