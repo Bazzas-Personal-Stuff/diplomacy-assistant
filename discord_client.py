@@ -34,8 +34,7 @@ class MyClient(discord.Client):
 
             embed.color = discord.Colour(message[3])
             embed.set_footer(text=message[4])
-            await channel.send('<@&{}>'.format(self.ROLE_ID))
-            await channel.send(embed=embed)
+            await channel.send(embed=embed, content='<@&{}>'.format(self.ROLE_ID))
 
         print(self.POLL_WAIT_TIME)
 
