@@ -38,7 +38,7 @@ def get_status() -> (str, str, bool, int, str):
 
         phases = {
             "Diplomacy": "\N{pistol} DIPLOMACY \N{pistol}\n",
-            "Retreats": "\N{anger symbol} RETREAT \N{anger symbol}\n\N{no entry sign} Communications Blackout \N{no entry sign}\n",
+            "Retreats": "\N{anger symbol} RETREAT \N{anger symbol}\n",
             "Builds": "\N{hammer} BUILD \N{hammer}\n"
         }
 
@@ -54,7 +54,7 @@ def get_status() -> (str, str, bool, int, str):
         date = "{}, {}".format(this_season, this_year)
 
         url = scraper.get_map_url()
-        print("Sending message: {}".format(message_string))
+        print("Sending message: {} {} {}".format(message_string, date, url))
 
         with open(save_name, "wt") as save_file:
             save_file.write("{}\n{}\n{}\n".format(this_season, this_year, this_phase))
