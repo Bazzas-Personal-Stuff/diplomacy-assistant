@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from dotenv import load_dotenv
+import time
 import os
 
 load_dotenv()
@@ -29,4 +30,4 @@ def get_date_and_phase() -> (str, str, str):
 
 def get_map_url() -> str:
     map_link = soup.find(id='LargeMapLink')
-    return ROOT_URL + map_link['href']
+    return ROOT_URL + map_link['href'] + '&?={}'.format(time.time())
