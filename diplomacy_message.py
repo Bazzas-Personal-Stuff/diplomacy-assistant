@@ -52,7 +52,7 @@ def get_status() -> (str, str, bool, int, str):
 
         message_string = phases[this_phase]
         color = colors[this_phase]
-        comms = True if this_phase == "Diplomacy" else False
+        comms = True if this_phase == "Diplomacy" or "Pre-game" else False
         date = "{}, {}".format(this_season, this_year)
 
         url = scraper.get_map_url()
