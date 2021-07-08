@@ -14,7 +14,7 @@ def get_status() -> (str, str, bool, int, str):
     if not os.path.isfile(save_name):
         # Default save file, ensures first turn is sent
         with open(save_name, "wt") as save_file:
-            save_file.write("Spring\n1000\nDiplomacy\n")
+            save_file.write("Spring\n1000\nPre-game\n")
 
     # Save file format:
     # 1     Season      <Autumn | Spring>
@@ -39,13 +39,15 @@ def get_status() -> (str, str, bool, int, str):
         phases = {
             "Diplomacy": "\N{pistol} DIPLOMACY \N{pistol}\n",
             "Retreats": "\N{anger symbol} RETREAT \N{anger symbol}\n",
-            "Builds": "\N{hammer} BUILD \N{hammer}\n"
+            "Builds": "\N{hammer} BUILD \N{hammer}\n",
+            "Pre-game": "\N{alarm clock} PRE-GAME \N{alarm clock}\n"
         }
 
         colors = {
             "Diplomacy": 0x47b484,
             "Retreats": 0xf2454b,
-            "Builds": 0xf7a432
+            "Builds": 0xf7a432,
+            "Pre-game": 0x7289da
         }
 
         message_string = phases[this_phase]
