@@ -29,8 +29,10 @@ class MyClient(discord.Client):
         if message is not None:
             embed = discord.Embed().set_image(url=message[1])
             embed.title = message[0]
+            embed.description = ''
             if not message[2]:
-                embed.description = self.COMMS_MESSAGE
+                embed.description = self.COMMS_MESSAGE + '\n\n'
+            embed.description += '[Game Link]({}{})'.format(scraper.GAME_URL, scraper.WD_GAME_ID)
 
             embed.color = discord.Colour(message[3])
             embed.set_footer(text=message[4])
