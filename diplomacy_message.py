@@ -51,14 +51,16 @@ def get_status() -> (str, str, bool, int, str):
                 "Diplomacy": "\N{pistol} DIPLOMACY \N{pistol}\n",
                 "Retreats": "\N{anger symbol} RETREAT \N{anger symbol}\n",
                 "Builds": "\N{hammer} BUILD \N{hammer}\n",
-                "Pre-game": "\N{alarm clock} PRE-GAME \N{alarm clock}\n"
+                "Pre-game": "\N{alarm clock} PRE-GAME \N{alarm clock}\n",
+                "Finished": "\N{chequered flag} FINISHED \N{chequered flag}"
             }
 
             colors = {
                 "Diplomacy": 0x47b484,
                 "Retreats": 0xf2454b,
                 "Builds": 0xf7a432,
-                "Pre-game": 0x7289da
+                "Pre-game": 0x7289da,
+                "Finished": 0x7289da
             }
 
             message_string = phases[this_phase]

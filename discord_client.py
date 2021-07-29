@@ -7,9 +7,10 @@ import os
 import scraper
 
 
-class MyClient(discord.Client):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class MyClient(commands.Bot):
+    def __init__(self, command_prefix, self_bot):
+        commands.Bot.__init__(self, command_prefix=command_prefix, self_bot=self_bot, case_insensitive=True)
+        self.add_commands()
         self.poll_diplomacy.start()
         # self.bg_task = self.loop.create_task(self.poll_diplomacy())
 
@@ -41,20 +42,22 @@ class MyClient(discord.Client):
 
         print(self.POLL_WAIT_TIME)
 
-    bot = commands.Bot(command_prefix='$')
+    def add_commands(self):
+        @self.command(name='setGame', pass_context=True, brief='<game ID>   Set the current game to be tracked')
+        async def set_new_id(ctx, new_id):
+            try:
+                id_test = int(new_id)
 
-    @bot.command(name='setID')
-    async def set_new_id(ctx, new_id):
-        try:
-            id_test = int(new_id)
+                os.environ['WD_GAME_ID'] = new_id
+                dotenv_file = dotenv.find_dotenv()
+                dotenv.set_key(dotenv_file, 'WD_GAME_ID', new_id)
 
-            os.environ['WD_GAME_ID'] = new_id
-            with dotenv.find_dotenv() as env:
-                dotenv.set_key(env, 'WD_GAME_ID', new_id)
+                diplomacy_message.update_dotenv()
+                scraper.update_dotenv()
 
-            diplomacy_message.update_dotenv()
-            scraper.update_dotenv()
+                await ctx.send("Game ID is now {}".format(os.getenv('WD_GAME_ID')))
+                await self.poll_diplomacy()
 
-            await ctx.send("Game ID is now {}".format(os.getenv('WD_GAME_ID')))
-        except ValueError:
-            await ctx.send("Please enter a valid Game ID.")
+            except ValueError:
+                print("Value error")
+                await ctx.send("Please enter a valid Game ID.")
