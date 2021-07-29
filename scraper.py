@@ -4,12 +4,20 @@ from dotenv import load_dotenv
 import time
 import os
 
-load_dotenv()
-WD_GAME_ID = os.getenv('WD_GAME_ID')
+WD_GAME_ID = ''
 ROOT_URL = "https://webdiplomacy.net/"
 GAME_URL = ROOT_URL + "board.php?gameID="
-
 soup: any
+
+load_dotenv()
+
+
+def update_dotenv():
+    global WD_GAME_ID
+    WD_GAME_ID = os.getenv('WD_GAME_ID')
+
+
+update_dotenv()
 
 
 def get_soup():

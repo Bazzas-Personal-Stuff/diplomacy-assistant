@@ -3,8 +3,17 @@ import dotenv
 import scraper
 import sys
 
+
+WD_GAME_ID = ''
 dotenv.load_dotenv()
-WD_GAME_ID = os.getenv('WD_GAME_ID')
+
+
+def update_dotenv():
+    global WD_GAME_ID
+    WD_GAME_ID = os.getenv('WD_GAME_ID')
+
+
+update_dotenv()
 
 
 def get_status() -> (str, str, bool, int, str):

@@ -1,7 +1,8 @@
 import diplomacy_message
 import discord
 from discord.ext import tasks
-from dotenv import load_dotenv
+from discord.ext import commands
+import dotenv
 import os
 import scraper
 
@@ -13,7 +14,7 @@ class MyClient(discord.Client):
         # self.bg_task = self.loop.create_task(self.poll_diplomacy())
 
     VERBOSE = False
-    load_dotenv()
+    dotenv.load_dotenv()
     TOKEN = os.getenv('DISCORD_TOKEN')
     CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
     ROLE_ID = os.getenv('DISCORD_MENTION_ROLE_ID')
@@ -40,5 +41,20 @@ class MyClient(discord.Client):
 
         print(self.POLL_WAIT_TIME)
 
+    bot = commands.Bot(command_prefix='$')
 
+    @bot.command(name='setID')
+    async def set_new_id(ctx, new_id):
+        try:
+            id_test = int(new_id)
 
+            os.environ['WD_GAME_ID'] = new_id
+            with dotenv.find_dotenv() as env:
+                dotenv.set_key(env, 'WD_GAME_ID', new_id)
+
+            diplomacy_message.update_dotenv()
+            scraper.update_dotenv()
+
+            await ctx.send("Game ID is now {}".format(os.getenv('WD_GAME_ID')))
+        except ValueError:
+            await ctx.send("Please enter a valid Game ID.")
